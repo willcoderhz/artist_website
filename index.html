@@ -55,10 +55,11 @@
 }
 
 .artist-name {
-    top: 1rem;
-    left: 1rem;
+    top: 4.5rem;
+    left: 1.4rem;
     font-family: 'Tangerine', cursive;/* 替换为艺术家签名的字体 */
-    font-size: 40px;
+    font-size: 34px;
+    
 }
 
 .artist-intro {
@@ -117,9 +118,19 @@
     color: #FFFFFF; /* 你可以根据需要调整字体颜色 */
     font-family: 'Abel', sans-serif;
 }
+
+.signature {
+    position: fixed;
+    top: 0;
+    left: 0.8rem;
+    z-index: 100;
+    width: auto;
+    height: 70px; /* 您可以根据需要更改此值 */
+}
 </style>
 </head>
 <body>
+    <img src="./img/signature.png" alt="Artist Signature" class="signature">
 <div class="viewport">
     <div class="artwork-container">
         <!-- Artwork sections -->
