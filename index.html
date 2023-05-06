@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术家作品展示</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        transition: background-color 1s;
+    }
+
+    .viewport {
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .artwork-container {
+        display: flex;
+        flex-direction: column;
+        height: 600vh;
+        transition: transform 1s;
+    }
+
+    .artwork {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .artwork img {
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        border: 3px solid white;
+    }
+
+    .fixed-text {
+    position: fixed;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.artist-name {
+    top: 1rem;
+    left: 1rem;
+    font-family: 'SignPainter', cursive; /* 替换为艺术家签名的字体 */
+}
+
+.artist-intro {
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.contact-info {
+    top: 1rem;
+    right: 1rem;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar {
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.navbar button {
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    background-color: gray;
+}
+</style>
+</head>
+<body>
+<div class="viewport">
+    <div class="artwork-container">
+        <!-- Artwork sections -->
+        <section class="artwork" data-color="rgba(134, 201, 240, 0.82)">
+            <img src="./img/artwork1.jpg" alt="Artwork 1">
+        </section>
+        <section class="artwork" data-color='rgba(222, 177, 195, 0.9)'>
+            <img src="./img/artwork2.jpg" alt="Artwork 2">
+        </section>
+        <section class="artwork" data-color="rgba(240, 221, 177, 0.82)">
+            <img src="./img/artwork3.jpg" alt="Artwork 3">
+        </section>
+        <section class="artwork" data-color="rgba(240, 111, 214, 0.52)">
+            <img src="./img/artwork4.jpg" alt="Artwork 4">
+        </section>
+        <section class="artwork" data-color="rgba(157, 157, 157, 0.82)">
+            <img src="./img/artwork5.jpg" alt="Artwork 5">
+        </section>
+        <section class="artwork" data-color="rgba(125, 236, 135, 0.82)">
+            <img src="./img/artwork6.jpg" alt="Artwork 6">
+        </section>
+    </div>
+</div>
+<div class="fixed-text artist-name">艺术家名称</div>
+<div class="fixed-text artist-intro">艺术家简介</div>
+<div class="fixed-text contact-info">
+    <p>联系方式：</p>
+    <p>Email: artist@example.com</p>
+    <p>电话: +123 456 7890</p>
+    <p><a href="https://twitter.com/artist">Twitter</a></p>
+</div>
+
+<div class="fixed-text navbar">
+    <button class="nav-button" data-title="作品1">123</button>
+    <button class="nav-button" data-title="作品2"></button>
+    <button class="nav-button" data-title="作品3"></button>
+    <button class="nav-button" data-title="作品4"></button>
+    <button class="nav-button" data-title="作品5"></button>
+    <button class="nav-button" data-title="作品6"></button>
+</div>
+<script>
+    const artworkContainer = document.querySelector('.artwork-container');
+    const artworks = document.querySelectorAll('.artwork');
+
+    let currentArtworkIndex = 0;
+
+    function setBackground(color) {
+        document.body.style.backgroundColor = color;
+    }
+
+    function scrollToArtwork(index) {
+        const targetArtwork = artworks[index];
+        const color = targetArtwork.dataset.color;
+        setBackground(color);
+        artworkContainer.style.transform = `translateY(-${index * 100}vh)`;
+        currentArtworkIndex = index;
+    }
+
+    document.addEventListener('wheel', (e) => {
+        if (e.deltaY > 0 && currentArtworkIndex < artworks.length - 1) {
+            // Scroll down
+            scrollToArtwork(currentArtworkIndex + 1);
+        } else if (e.deltaY < 0 && currentArtworkIndex > 0) {
+            // Scroll up
+            scrollToArtwork(currentArtworkIndex - 1);
+        }
+    });
+    navButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        scrollToArtwork(index);
+    });
+
+    button.addEventListener('mouseover', () => {
+        button.textContent = button.dataset.title;
+    });
+
+    button.addEventListener('mouseout', () => {
+        button.textContent = '';
+    });
+});
+    // Initialize the background color with the first artwork's color
+    setBackground(artworks[0].dataset.color);
+</script>
+
+</body>
+</html>
