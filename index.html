@@ -248,6 +248,43 @@ function scrollToArtwork(index) {
     navButtons[index].classList.add('active');
     currentArtworkIndex = index;
 }
+
+const images = document.querySelectorAll('.artwork img');
+
+images.forEach(img => {
+    img.addEventListener('click', e => {
+        showLargeImage(e.target.src);
+    });
+});
+
+function showLargeImage(src) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.cursor = 'pointer';
+    overlay.style.zIndex = 1000;
+
+    const largeImage = document.createElement('img');
+    largeImage.src = src;
+    largeImage.style.maxWidth = '90%';
+    largeImage.style.maxHeight = '90%';
+    largeImage.style.objectFit = 'contain';
+    largeImage.style.border = '5px solid white';
+
+    overlay.appendChild(largeImage);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        document.body.removeChild(overlay);
+    });
+}
 </script>
 
 </body>
